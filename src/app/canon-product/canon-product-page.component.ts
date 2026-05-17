@@ -14,6 +14,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+const FRAME_COUNT = 116;
+
 @Component({
   selector: 'app-canon-product-page',
   templateUrl: './canon-product-page.component.html',
@@ -28,8 +30,8 @@ export class CanonProductPageComponent {
 
   private readonly storyContainer =
     viewChild.required<ElementRef<HTMLElement>>('storyContainer');
-  private readonly productVideo =
-    viewChild.required<ElementRef<HTMLVideoElement>>('productVideo');
+  private readonly productCanvas =
+    viewChild.required<ElementRef<HTMLCanvasElement>>('productCanvas');
   private readonly storySteps =
     viewChildren<ElementRef<HTMLElement>>('storyStep');
 
@@ -50,63 +52,73 @@ export class CanonProductPageComponent {
   }
 
   private setupScrollStory(): void {
-    const video = this.productVideo().nativeElement;
+    const canvas = this.productCanvas().nativeElement;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
 
-    video.pause();
-    video.currentTime = 0;
-
     if (prefersReducedMotion) {
+      const first = new Image();
+      first.onload = () => ctx.drawImage(first, 0, 0, canvas.width, canvas.height);
+      first.src = '/canon/frames/frame0001.jpg';
       return;
     }
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const runWhenMetadataIsReady = (): void => {
-      if (!Number.isFinite(video.duration) || video.duration <= 0) {
-        return;
+    const frames: HTMLImageElement[] = [];
+    let loadedCount = 0;
+
+    const onFrameLoaded = (index: number): void => {
+      loadedCount++;
+      if (index === 0) {
+        ctx.drawImage(frames[0], 0, 0, canvas.width, canvas.height);
       }
-
-      this.createScrollAnimations(video);
+      if (loadedCount === FRAME_COUNT) {
+        this.createScrollAnimations(frames, ctx, canvas);
+      }
     };
 
-    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      runWhenMetadataIsReady();
-      return;
+    for (let i = 1; i <= FRAME_COUNT; i++) {
+      const img = new Image();
+      const frameIndex = i - 1;
+      frames.push(img);
+      img.onload = () => onFrameLoaded(frameIndex);
+      img.onerror = () => onFrameLoaded(frameIndex);
+      img.src = `/canon/frames/frame${String(i).padStart(4, '0')}.jpg`;
     }
-
-    video.addEventListener('loadedmetadata', runWhenMetadataIsReady, {
-      once: true,
-    });
-    video.load();
-
-    this.cleanupAnimations = () => {
-      video.removeEventListener('loadedmetadata', runWhenMetadataIsReady);
-    };
   }
 
-  private createScrollAnimations(video: HTMLVideoElement): void {
+  private createScrollAnimations(
+    frames: HTMLImageElement[],
+    ctx: CanvasRenderingContext2D,
+    canvas: HTMLCanvasElement,
+  ): void {
     const story = this.storyContainer().nativeElement;
     const steps = this.storySteps().map((step) => step.nativeElement);
-    const endTime = Math.max(video.duration - 0.05, 0);
+    const lastFrame = frames.length - 1;
 
-    const context = gsap.context(() => {
+    const scrollContext = gsap.context(() => {
       gsap.set(steps, { opacity: 0, y: 36 });
       gsap.set(steps[0], { opacity: 1, y: 0 });
 
-      gsap.to(video, {
-        currentTime: endTime,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: story,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: true,
-          pin: '.canon-product__stage',
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+      ScrollTrigger.create({
+        trigger: story,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+        pin: '.canon-product__stage',
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const index = Math.round(self.progress * lastFrame);
+          const frame = frames[index];
+          if (frame?.complete) {
+            ctx.drawImage(frame, 0, 0, canvas.width, canvas.height);
+          }
         },
       });
 
@@ -146,12 +158,94 @@ export class CanonProductPageComponent {
           );
         }
       });
+
+      gsap.to('.canon-product__scroll-hint', {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: story,
+          start: 'top top',
+          end: '4% top',
+          scrub: true,
+        },
+      });
     }, story);
+
+    const entranceContext = this.createEntranceAnimations();
 
     ScrollTrigger.refresh();
 
     this.cleanupAnimations = () => {
-      context.revert();
+      scrollContext.revert();
+      entranceContext.revert();
     };
+  }
+
+  private createEntranceAnimations(): gsap.Context {
+    return gsap.context(() => {
+      gsap.from('.canon-product__section-intro > *', {
+        opacity: 0,
+        y: 28,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: '.canon-product__section-intro',
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.from('.canon-product__feature-grid article', {
+        opacity: 0,
+        y: 48,
+        duration: 0.65,
+        ease: 'power3.out',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: '.canon-product__feature-grid',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.from('.canon-product__specs > div:first-child > *', {
+        opacity: 0,
+        y: 24,
+        duration: 0.65,
+        ease: 'power3.out',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: '.canon-product__specs',
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.from('.canon-product__specs dl > div', {
+        opacity: 0,
+        y: 16,
+        duration: 0.5,
+        ease: 'power3.out',
+        stagger: 0.07,
+        scrollTrigger: {
+          trigger: '.canon-product__specs dl',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.from('.canon-product__cta > div', {
+        opacity: 0,
+        y: 36,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: '.canon-product__cta',
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      });
+    });
   }
 }
