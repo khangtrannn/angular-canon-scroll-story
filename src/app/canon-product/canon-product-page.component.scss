@@ -1,0 +1,343 @@
+:host {
+  display: block;
+  color: #111111;
+  background: #f3f0ea;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.canon-product {
+  overflow-x: clip;
+}
+
+.canon-product__story {
+  min-height: 600vh;
+  background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.82), transparent 34rem), linear-gradient(180deg, #f3f0ea 0%, #ebe4d7 72%, #111111 100%);
+}
+
+.canon-product__stage {
+  position: relative;
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(1rem, 2vw, 2rem);
+}
+
+.canon-product__nav {
+  position: absolute;
+  z-index: 5;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1rem, 2vw, 2rem);
+  pointer-events: none;
+
+  a {
+    pointer-events: auto;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.canon-product__brand,
+.canon-product__nav-link,
+.canon-product__actions a,
+.canon-product__eyebrow,
+.canon-product__scroll-hint {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.canon-product__brand {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.canon-product__nav-link,
+.canon-product__actions a {
+  border: 1px solid rgba(17, 17, 17, 0.18);
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+}
+
+.canon-product__media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.canon-product__video {
+  display: block;
+  width: min(78vw, 900px);
+  height: min(78vw, 900px);
+  object-fit: contain;
+  filter: drop-shadow(0 3rem 3.5rem rgba(17, 17, 17, 0.24));
+}
+
+.canon-product__copy {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 1180px);
+  min-height: 100dvh;
+  pointer-events: none;
+}
+
+.canon-product__step {
+  position: absolute;
+  bottom: clamp(4.5rem, 10vh, 7rem);
+  left: 0;
+  max-width: min(46rem, 88vw);
+  opacity: 0;
+
+  h1,
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h1,
+  h2 {
+    max-width: 10ch;
+    font-size: clamp(3rem, 8vw, 8.5rem);
+    font-weight: 750;
+    line-height: 0.88;
+    letter-spacing: -0.06em;
+  }
+
+  > p:last-child {
+    max-width: 34rem;
+    margin-top: 1.25rem;
+    color: #5f5a52;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    line-height: 1.55;
+  }
+}
+
+.canon-product__step:not(:first-child) {
+  right: 0;
+  left: auto;
+  text-align: right;
+
+  h2,
+  > p:last-child {
+    margin-left: auto;
+  }
+}
+
+.canon-product__step:first-child {
+  opacity: 1;
+}
+
+.canon-product__eyebrow,
+.canon-product__scroll-hint {
+  color: #5f5a52;
+}
+
+.canon-product__eyebrow {
+  margin: 0 0 0.85rem;
+}
+
+.canon-product__scroll-hint {
+  position: absolute;
+  z-index: 4;
+  bottom: 1.5rem;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+}
+
+.canon-product__features,
+.canon-product__specs,
+.canon-product__cta {
+  padding: clamp(4.5rem, 10vw, 9rem) clamp(1rem, 4vw, 4rem);
+}
+
+.canon-product__features {
+  background: #111111;
+  color: #f7f3ea;
+}
+
+.canon-product__section-intro,
+.canon-product__feature-grid,
+.canon-product__specs,
+.canon-product__cta {
+  width: min(100%, 1180px);
+  margin-inline: auto;
+}
+
+.canon-product__section-intro h2,
+.canon-product__specs h2,
+.canon-product__cta h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 5.5rem);
+  font-weight: 750;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.canon-product__feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  background: rgba(247, 243, 234, 0.18);
+
+  article {
+    min-height: 18rem;
+    padding: clamp(1.25rem, 2vw, 2rem);
+    background: #111111;
+  }
+
+  span,
+  p {
+    color: rgba(247, 243, 234, 0.68);
+  }
+
+  h3 {
+    margin: 5rem 0 0.75rem;
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.55;
+  }
+}
+
+.canon-product__specs {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  gap: clamp(2rem, 8vw, 7rem);
+
+  dl {
+    margin: 0;
+  }
+
+  div {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 1rem;
+    padding: 1.35rem 0;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+  }
+
+  dt {
+    color: #5f5a52;
+    font-weight: 800;
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 700;
+  }
+}
+
+.canon-product__cta {
+  min-height: 80dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.canon-product__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+
+  a:first-child {
+    background: #111111;
+    color: #f7f3ea;
+  }
+}
+
+a:focus-visible {
+  outline: 3px solid #7a4d00;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .canon-product__video {
+    width: min(92vw, 680px);
+    height: min(92vw, 680px);
+  }
+
+  .canon-product__step,
+  .canon-product__step:not(:first-child) {
+    right: auto;
+    left: 0;
+    max-width: min(34rem, 90vw);
+    text-align: left;
+  }
+
+  .canon-product__step h1,
+  .canon-product__step h2 {
+    max-width: 11ch;
+    font-size: clamp(3rem, 14vw, 5.8rem);
+  }
+
+  .canon-product__feature-grid,
+  .canon-product__specs {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .canon-product__story {
+    min-height: 520vh;
+  }
+
+  .canon-product__video {
+    width: 96vw;
+    height: 96vw;
+  }
+
+  .canon-product__step {
+    bottom: 5.25rem;
+  }
+
+  .canon-product__specs div {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canon-product__story,
+  .canon-product__stage {
+    min-height: auto;
+  }
+
+  .canon-product__stage {
+    padding-top: 6rem;
+  }
+
+  .canon-product__media,
+  .canon-product__copy,
+  .canon-product__step {
+    position: relative;
+  }
+
+  .canon-product__copy {
+    display: grid;
+    gap: 3rem;
+    padding-top: min(80vw, 32rem);
+  }
+
+  .canon-product__step,
+  .canon-product__step:not(:first-child) {
+    inset: auto;
+    opacity: 1;
+    text-align: left;
+  }
+}
