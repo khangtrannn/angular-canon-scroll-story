@@ -1,68 +1,79 @@
 :host {
-  --canon-bg: #f3f0ea;
-  --canon-ink: #111111;
-  --canon-muted: #625d54;
-  --canon-paper: #fbf8f1;
-  --canon-line: rgba(17, 17, 17, 0.14);
-  --canon-dark: #111111;
-  --canon-dark-text: #f7f3ea;
+  --canon-bg: #ffffff;
+  --canon-bg-alt: #f5f5f7;
+  --canon-ink: #1d1d1f;
+  --canon-muted: #6e6e73;
+  --canon-red: #b70813;
+  --canon-red-deep: #74040c;
+  --canon-line: rgba(29, 29, 31, 0.1);
+  --canon-line-strong: rgba(29, 29, 31, 0.18);
+  --canon-dark: #000000;
+  --canon-dark-text: #f5f5f7;
+  --canon-dark-muted: rgba(245, 245, 247, 0.62);
+  --canon-radius-lg: 28px;
+  --canon-radius-md: 18px;
+  --canon-easing: cubic-bezier(0.16, 1, 0.3, 1);
+
   display: block;
   color: var(--canon-ink);
   background: var(--canon-bg);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, "Segoe UI", sans-serif;
+  font-feature-settings: "ss01", "cv01", "cv11";
   font-kerning: normal;
   text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
 }
 
 .canon-product {
   overflow-x: clip;
 }
 
-.canon-product__story {
-  min-height: 620vh;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.9), transparent 30rem),
-    radial-gradient(circle at 18% 18%, rgba(199, 181, 151, 0.38), transparent 26rem),
-    linear-gradient(180deg, var(--canon-bg) 0%, #e9e0d2 68%, var(--canon-dark) 100%);
-}
-
-.canon-product__stage {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100dvh;
-  overflow: hidden;
-  padding: clamp(1.1rem, 2.4vw, 2.5rem);
-  background: #ffffff;
-}
-
-.canon-product__stage::before {
-  position: absolute;
-  z-index: 0;
-  content: "";
-  pointer-events: none;
-  inset: clamp(4.5rem, 9vh, 6.5rem) clamp(1rem, 4vw, 4rem);
-  border: 1px solid rgba(17, 17, 17, 0.08);
-}
-
+// ─── Sticky glass nav ────────────────────────────────────────────────
 .canon-product__nav {
-  position: absolute;
-  z-index: 5;
+  position: fixed;
+  z-index: 50;
   inset: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(1.1rem, 2.4vw, 2.5rem);
-  pointer-events: none;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem);
+  height: 48px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 300ms var(--canon-easing), border-color 300ms var(--canon-easing),
+    backdrop-filter 300ms var(--canon-easing);
+}
 
-  a {
-    pointer-events: auto;
-  }
+.canon-product__nav.is-scrolled {
+  background: rgba(251, 251, 253, 0.72);
+  border-bottom-color: var(--canon-line);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.canon-product__brand {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .canon-product__nav-actions {
   display: flex;
-  gap: 0.6rem;
+  gap: clamp(1rem, 2vw, 1.75rem);
+  align-items: center;
+}
+
+.canon-product__nav-link {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--canon-ink);
+  letter-spacing: -0.005em;
+  opacity: 0.86;
+  transition: opacity 180ms var(--canon-easing);
+}
+
+.canon-product__nav-link:hover {
+  opacity: 1;
 }
 
 a {
@@ -70,68 +81,69 @@ a {
   text-decoration: none;
 }
 
-.canon-product__brand,
-.canon-product__nav-link,
-.canon-product__actions a,
-.canon-product__eyebrow,
-.canon-product__scroll-hint {
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+// ─── Hero / pinned scroll story ──────────────────────────────────────
+.canon-product__story {
+  min-height: 700vh;
+  background: var(--canon-bg);
 }
 
-.canon-product__brand {
-  font-size: 0.95rem;
-}
-
-.canon-product__nav-link,
-.canon-product__actions a {
-  border: 1px solid rgba(17, 17, 17, 0.2);
-  border-radius: 999px;
-  padding: 0.78rem 1.05rem;
-  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
-}
-
-.canon-product__nav-link:hover,
-.canon-product__actions a:hover {
-  background: var(--canon-ink);
-  border-color: var(--canon-ink);
-  color: var(--canon-dark-text);
+.canon-product__stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(24rem, 0.86fr) minmax(0, 1.14fr);
+  align-items: center;
+  gap: clamp(1.5rem, 3.5vw, 4rem);
+  padding: 3.5rem clamp(1.75rem, 4.5vw, 5rem) 2.5rem;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--canon-bg);
 }
 
 .canon-product__media {
+  position: relative;
+  inset: auto;
   grid-column: 2;
-  grid-row: 1;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 1;
+  height: 100%;
+  padding-right: clamp(0.75rem, 2vw, 2rem);
+  will-change: transform;
 }
 
 .canon-product__video {
+  position: relative;
   display: block;
-  width: min(42vw, 560px);
-  height: min(42vw, 560px);
-  filter: drop-shadow(0 1.5rem 2.5rem rgba(17, 17, 17, 0.1));
+  width: 100%;
+  max-width: min(72vmin, 720px);
+  aspect-ratio: 1 / 1;
+  max-height: min(74dvh, 720px);
+  mix-blend-mode: multiply;
   transform: translateZ(0);
 }
 
 .canon-product__copy {
+  position: relative;
+  inset: auto;
   grid-column: 1;
   grid-row: 1;
-  position: relative;
   z-index: 2;
-  min-height: 100dvh;
   pointer-events: none;
+  min-height: 22rem;
+  height: 100%;
 }
 
 .canon-product__step {
   position: absolute;
-  bottom: clamp(5rem, 11vh, 8rem);
+  top: 50%;
   left: 0;
-  max-width: min(44rem, 88vw);
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  max-width: 32rem;
+  text-align: left;
   opacity: 0;
 
   h1,
@@ -142,364 +154,911 @@ a {
 
   h1,
   h2 {
-    max-width: 9.5ch;
-    font-size: clamp(3.4rem, 8.8vw, 9.4rem);
-    font-weight: 760;
-    line-height: 0.86;
-    letter-spacing: -0.055em;
+    margin: 0;
+    max-width: 13ch;
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    color: var(--canon-ink);
   }
 
-  > p:last-child {
-    max-width: 31rem;
-    margin-top: 1.35rem;
+  > p:last-of-type {
+    margin: 1rem 0 0;
+    max-width: 30rem;
     color: var(--canon-muted);
-    font-size: clamp(1rem, 1.8vw, 1.25rem);
-    line-height: 1.5;
+    font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+    line-height: 1.45;
+    letter-spacing: -0.011em;
   }
 }
 
-.canon-product__step:not(:first-child) {
-  right: clamp(0rem, 4vw, 3.5rem);
-  left: auto;
-  text-align: right;
+.canon-product__quick-specs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  max-width: 31rem;
+  margin: clamp(1.35rem, 2.6vw, 2rem) 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--canon-line);
 
-  h2,
-  > p:last-child {
-    margin-left: auto;
+  div {
+    padding-right: 1rem;
+  }
+
+  dt {
+    margin: 0 0 0.28rem;
+    color: var(--canon-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--canon-ink);
+    font-size: clamp(0.85rem, 1vw, 0.98rem);
+    font-weight: 650;
+    line-height: 1.25;
+    letter-spacing: 0;
   }
 }
 
-.canon-product__step:nth-child(2) {
-  top: clamp(7rem, 16vh, 10rem);
+.canon-product__step--top,
+.canon-product__step--bottom {
+  top: 50%;
   bottom: auto;
-}
-
-.canon-product__step:nth-child(3) {
-  right: auto;
-  bottom: clamp(4.75rem, 9vh, 6.5rem);
-  left: clamp(0rem, 5vw, 4rem);
-  text-align: left;
-}
-
-.canon-product__step:nth-child(4) {
-  top: clamp(7rem, 14vh, 9rem);
-  bottom: auto;
-}
-
-.canon-product__step:nth-child(5) {
-  right: clamp(0rem, 5vw, 4.5rem);
-  bottom: clamp(5.25rem, 10vh, 7.5rem);
 }
 
 .canon-product__step:first-child {
   opacity: 1;
 }
 
-.canon-product__eyebrow,
-.canon-product__scroll-hint {
-  color: var(--canon-muted);
+.canon-product__final-map {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 4.25rem clamp(1.5rem, 3vw, 3.5rem) 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-.canon-product__eyebrow {
-  margin: 0 0 0.85rem;
+.canon-product__callouts {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.canon-product__callout {
+  --dot-x: 0%;
+  --dot-y: 0%;
+  --line-x: 0;
+  --line-y: 0;
+  --line-width: 6rem;
+  --line-height: 1px;
+  --line-end-height: 1.75rem;
+
+  position: absolute;
+  width: clamp(8.5rem, 12vw, 13rem);
+  color: var(--canon-muted);
+  font-size: clamp(0.68rem, 0.76vw, 0.82rem);
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.canon-product__callout strong {
+  display: block;
+  margin-bottom: 0.28rem;
+  color: var(--canon-ink);
+  font-size: clamp(0.72rem, 0.82vw, 0.9rem);
+  font-weight: 700;
   line-height: 1.2;
 }
 
+.canon-product__callout-dot {
+  position: absolute;
+  top: var(--dot-y);
+  left: var(--dot-x);
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: var(--canon-red);
+  box-shadow: 0 0 0 1px var(--canon-red);
+}
+
+.canon-product__callout-line {
+  position: absolute;
+  top: calc(var(--dot-y) + var(--line-y));
+  left: calc(var(--dot-x) + var(--line-x));
+  width: var(--line-width);
+  height: var(--line-height);
+  background: var(--canon-line-strong);
+  transform-origin: 0 0;
+}
+
+.canon-product__callout-line::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: var(--line-end-height);
+  background: var(--canon-line-strong);
+  content: "";
+}
+
+.canon-product__callout--top-dials {
+  --dot-x: -1.15rem;
+  --dot-y: 0.32rem;
+  --line-x: 5.2rem;
+  --line-y: 0.14rem;
+  --line-width: 12.5rem;
+  --line-end-height: 2.35rem;
+  top: 12.8%;
+  left: calc(50% - 30rem);
+}
+
+.canon-product__callout--hot-shoe {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: -13rem;
+  --line-y: 0.14rem;
+  --line-width: 11.5rem;
+  --line-end-height: 2.35rem;
+  top: 20%;
+  right: calc(50% - 44rem);
+}
+
+.canon-product__callout--hot-shoe .canon-product__callout-line {
+  transform: scaleX(-1);
+}
+
+.canon-product__callout--grip {
+  --dot-x: -1.05rem;
+  --dot-y: 0.35rem;
+  --line-x: 6.3rem;
+  --line-y: 0.14rem;
+  --line-width: 11.5rem;
+  --line-end-height: 2rem;
+  top: 32%;
+  left: calc(50% - 36rem);
+}
+
+.canon-product__callout--sensor {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: -13.25rem;
+  --line-y: 0.14rem;
+  --line-width: 11rem;
+  --line-end-height: 2.2rem;
+  top: 35%;
+  right: calc(50% - 45rem);
+  width: 11.5rem;
+}
+
+.canon-product__callout--sensor .canon-product__callout-line {
+  transform: scaleX(-1);
+}
+
+.canon-product__callout--stabilization {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: 5.6rem;
+  --line-y: 0.14rem;
+  --line-width: 12rem;
+  --line-end-height: 2rem;
+  top: 52%;
+  left: calc(50% - 38.5rem);
+}
+
+.canon-product__callout--lcd {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: -13rem;
+  --line-y: 0.14rem;
+  --line-width: 11.5rem;
+  --line-end-height: 2rem;
+  top: 51%;
+  right: calc(50% - 52rem);
+}
+
+.canon-product__callout--lcd .canon-product__callout-line {
+  transform: scaleX(-1);
+}
+
+.canon-product__callout--mount {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: 5.8rem;
+  --line-y: 0.14rem;
+  --line-width: 10rem;
+  --line-end-height: 2.25rem;
+  top: 63.8%;
+  left: calc(50% - 38rem);
+}
+
+.canon-product__callout--slots {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: -11.5rem;
+  --line-y: 0.14rem;
+  --line-width: 10rem;
+  --line-end-height: 2.25rem;
+  top: 71%;
+  right: calc(50% - 44rem);
+}
+
+.canon-product__callout--slots .canon-product__callout-line {
+  transform: scaleX(-1);
+}
+
+.canon-product__callout--lens {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: 5.8rem;
+  --line-y: 0.14rem;
+  --line-width: 10rem;
+  --line-end-height: 2.25rem;
+  top: 80%;
+  left: calc(50% - 34.5rem);
+}
+
+.canon-product__callout--elements {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: -6rem;
+  --line-y: 0.14rem;
+  --line-width: 5rem;
+  --line-end-height: 2rem;
+  top: 89%;
+  left: calc(50% + 3.5rem);
+}
+
+.canon-product__callout--battery {
+  --dot-x: -1rem;
+  --dot-y: 0.35rem;
+  --line-x: -12rem;
+  --line-y: 0.14rem;
+  --line-width: 10.5rem;
+  --line-end-height: 2.25rem;
+  top: 87%;
+  right: calc(50% - 44rem);
+}
+
+.canon-product__callout--battery .canon-product__callout-line {
+  transform: scaleX(-1);
+}
+
+// Eyebrow — sentence case, medium weight, muted
+.canon-product__eyebrow {
+  margin: 0 0 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.011em;
+  color: var(--canon-muted);
+  text-transform: none;
+}
+
+.canon-product__eyebrow::before {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: var(--canon-red);
+  content: "";
+}
+
+// Per-word reveal helpers
+.word-row {
+  display: block;
+  overflow: hidden;
+  line-height: inherit;
+}
+
+.word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+// Scroll hint
 .canon-product__scroll-hint {
   position: absolute;
   z-index: 4;
-  bottom: 1.5rem;
+  bottom: clamp(1rem, 2.5vh, 1.75rem);
   left: 50%;
-  margin: 0;
   transform: translateX(-50%);
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--canon-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
 }
 
 .canon-product__scroll-hint::after {
   display: block;
   width: 1px;
-  height: 2.5rem;
-  margin: 0.75rem auto 0;
+  height: 2.25rem;
   background: currentColor;
   content: "";
   opacity: 0.42;
 }
 
+// ─── Shared section wrapper ──────────────────────────────────────────
 .canon-product__features,
 .canon-product__specs,
 .canon-product__cta {
-  padding: clamp(5.5rem, 11vw, 10rem) clamp(1rem, 4vw, 4rem);
-}
-
-.canon-product__features {
-  background: var(--canon-dark);
-  color: var(--canon-dark-text);
-}
-
-.canon-product__features .canon-product__eyebrow,
-.canon-product__cta .canon-product__eyebrow {
-  color: rgba(247, 243, 234, 0.62);
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 4vw, 4rem);
 }
 
 .canon-product__section-intro,
-.canon-product__feature-grid,
-.canon-product__specs,
-.canon-product__cta {
-  width: min(100%, 1220px);
+.canon-product__feature-mosaic,
+.canon-product__specs-inner,
+.canon-product__cta-inner {
+  width: min(100%, 1200px);
   margin-inline: auto;
 }
 
+// ─── Features: Apple mosaic ──────────────────────────────────────────
+.canon-product__features {
+  background:
+    linear-gradient(180deg, #f7f7f9 0%, #f1f2f4 100%);
+}
+
 .canon-product__section-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 0.55fr);
-  gap: clamp(2rem, 7vw, 6rem);
-  align-items: end;
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+
+  h2 {
+    margin: 0.4rem auto 0;
+    max-width: 14ch;
+    font-size: clamp(2.4rem, 5.2vw, 5rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+  }
 
   > p:last-child {
-    margin: 0;
-    color: rgba(247, 243, 234, 0.7);
-    font-size: clamp(1rem, 1.6vw, 1.2rem);
-    line-height: 1.55;
+    margin: 1.25rem auto 0;
+    max-width: 32rem;
+    color: var(--canon-muted);
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.45;
+    letter-spacing: -0.011em;
   }
 }
 
-.canon-product__section-intro h2,
-.canon-product__specs h2,
-.canon-product__cta h2 {
-  max-width: 11ch;
-  margin: 0;
-  font-size: clamp(2.6rem, 5.4vw, 6rem);
-  font-weight: 760;
-  line-height: 0.92;
-  letter-spacing: -0.05em;
-}
-
-.canon-product__feature-grid {
+.canon-product__feature-mosaic {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  margin-top: clamp(3.25rem, 7vw, 5.75rem);
-  background: rgba(247, 243, 234, 0.18);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
 
   article {
-    min-height: 20rem;
-    padding: clamp(1.25rem, 2vw, 2rem);
-    background: linear-gradient(180deg, #151515, #0f0f0f);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 30rem;
+    padding: 0;
+    background: var(--canon-bg);
+    border-radius: var(--canon-radius-lg);
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 1px 2px rgba(29, 29, 31, 0.04),
+      0 8px 28px rgba(29, 29, 31, 0.05);
+    transition: transform 260ms var(--canon-easing), box-shadow 260ms var(--canon-easing);
   }
 
-  span,
-  p {
-    color: rgba(247, 243, 234, 0.68);
+  article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 1px 2px rgba(29, 29, 31, 0.04),
+      0 1.25rem 3rem rgba(29, 29, 31, 0.1);
+  }
+
+  article:first-child,
+  article:last-child {
+    grid-column: 1 / -1;
+    min-height: 28rem;
+
+    .canon-product__feature-image {
+      height: 60%;
+      min-height: 16rem;
+    }
+  }
+
+  .canon-product__feature-image {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 60%;
+    min-height: 14rem;
+    flex: 0 0 auto;
+    object-fit: cover;
+    object-position: center;
+    mix-blend-mode: multiply;
+    z-index: 0;
+    background: linear-gradient(180deg, #ffffff, #f1f2f4);
+  }
+
+  article:first-child .canon-product__feature-image {
+    object-position: center 38%;
+  }
+
+  article:last-child .canon-product__feature-image {
+    object-position: center 50%;
+  }
+
+  .canon-product__feature-eyebrow {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--canon-muted);
+    letter-spacing: -0.005em;
+    margin: 0;
+    padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.5rem, 2.5vw, 2.25rem) 0;
+  }
+
+  .canon-product__feature-eyebrow::before {
+    display: inline-block;
+    width: 0.42rem;
+    height: 0.42rem;
+    margin-right: 0.45rem;
+    border-radius: 50%;
+    background: var(--canon-red);
+    content: "";
+    vertical-align: 0.08rem;
   }
 
   h3 {
-    margin: 6.5rem 0 0.75rem;
+    margin: 0;
+    padding: 0.5rem clamp(1.5rem, 2.5vw, 2.25rem) 0;
     font-size: clamp(1.4rem, 2vw, 2rem);
-    line-height: 1;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    color: var(--canon-ink);
+    max-width: 16ch;
   }
 
-  p {
+  article > p:last-of-type {
     margin: 0;
-    line-height: 1.55;
+    padding: 0.75rem clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.75rem, 2.75vw, 2.5rem);
+    max-width: 32rem;
+    color: var(--canon-muted);
+    font-size: clamp(0.96rem, 1.15vw, 1.05rem);
+    line-height: 1.5;
+    letter-spacing: -0.011em;
   }
 }
 
+// ─── Specs: centered hairline list ───────────────────────────────────
 .canon-product__specs {
-  display: grid;
-  grid-template-columns: 0.9fr 1fr;
-  gap: clamp(2rem, 8vw, 7rem);
-  background: var(--canon-bg);
-
-  > div > p:last-child {
-    max-width: 26rem;
-    margin: 1.35rem 0 0;
-    color: var(--canon-muted);
-    font-size: clamp(1rem, 1.5vw, 1.18rem);
-    line-height: 1.55;
-  }
-
-  dl {
-    margin: 0;
-    border-top: 1px solid var(--canon-line);
-  }
-
-  div {
-    display: grid;
-    grid-template-columns: 0.8fr 1fr;
-    gap: 1rem;
-    padding: 1.35rem 0;
-    border-bottom: 1px solid var(--canon-line);
-  }
-
-  dt {
-    color: var(--canon-muted);
-    font-weight: 800;
-  }
-
-  dd {
-    margin: 0;
-    font-weight: 700;
-  }
-}
-
-.canon-product__cta {
-  position: relative;
-  min-height: 88dvh;
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 0.45fr);
-  gap: clamp(2rem, 8vw, 7rem);
-  align-items: end;
+  background: #101114;
   color: var(--canon-dark-text);
-  background:
-    radial-gradient(circle at 72% 24%, rgba(247, 243, 234, 0.18), transparent 24rem),
-    linear-gradient(135deg, #111111, #070707);
-  overflow: hidden;
 }
 
-.canon-product__cta > div:first-child > p:last-child {
-  max-width: 34rem;
-  margin: 1.5rem 0 0;
-  color: rgba(247, 243, 234, 0.68);
-  font-size: clamp(1rem, 1.5vw, 1.18rem);
-  line-height: 1.55;
+.canon-product__specs .canon-product__eyebrow {
+  color: var(--canon-dark-muted);
 }
 
-.canon-product__cta-meta {
+.canon-product__specs-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canon-product__specs-intro {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+
+  h2 {
+    margin: 0.4rem auto 0;
+    max-width: 14ch;
+    font-size: clamp(2.4rem, 5.2vw, 5rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    color: var(--canon-dark-text);
+  }
+
+  > p:last-child {
+    margin: 1.25rem auto 0;
+    max-width: 32rem;
+    color: var(--canon-dark-muted);
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.45;
+    letter-spacing: -0.011em;
+  }
+}
+
+.canon-product__specs dl {
+  width: 100%;
+  max-width: 58rem;
   margin: 0;
-  color: rgba(247, 243, 234, 0.54);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border: 1px solid rgba(245, 245, 247, 0.1);
+  border-radius: var(--canon-radius-lg);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.canon-product__specs dl > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 8.5rem;
+  padding: 1.45rem 1rem;
+  border-right: 1px solid rgba(245, 245, 247, 0.1);
+  text-align: center;
+}
+
+.canon-product__specs dl > div:last-child {
+  border-right: 0;
+}
+
+.canon-product__specs dt {
+  color: var(--canon-dark-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.canon-product__specs dd {
+  margin: 0;
+  color: var(--canon-dark-text);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.011em;
+}
+
+// ─── CTA: centered light ─────────────────────────────────────────────
+.canon-product__cta {
+  background:
+    linear-gradient(135deg, rgba(183, 8, 19, 0.92), rgba(116, 4, 12, 0.96)),
+    #8f0710;
+  color: #ffffff;
+}
+
+.canon-product__cta .canon-product__eyebrow {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.canon-product__cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.canon-product__cta h2 {
+  margin: 0.4rem auto 0;
+  max-width: 16ch;
+  font-size: clamp(2.4rem, 5.2vw, 5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+}
+
+.canon-product__cta > .canon-product__cta-inner > p {
+  margin: 1.25rem auto 0;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.45;
+  letter-spacing: -0.011em;
 }
 
 .canon-product__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem;
-  margin-top: 1.25rem;
-
-  a {
-    border-color: rgba(247, 243, 234, 0.32);
-    color: var(--canon-dark-text);
-  }
-
-  a:first-child {
-    background: var(--canon-dark-text);
-    border-color: var(--canon-dark-text);
-    color: var(--canon-ink);
-  }
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
 
-a:focus-visible {
-  outline: 3px solid #7a4d00;
+// ─── Buttons ─────────────────────────────────────────────────────────
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.88rem 1.5rem;
+  background: #ffffff;
+  color: var(--canon-red-deep);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: background 220ms var(--canon-easing), transform 220ms var(--canon-easing);
+}
+
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.88rem 0;
+  color: var(--canon-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: opacity 220ms var(--canon-easing);
+}
+
+.canon-product__cta .btn-link {
+  color: #ffffff;
+}
+
+.btn-link::after {
+  content: "›";
+  display: inline-block;
+  margin-left: 0.1rem;
+  font-size: 1.1em;
+  line-height: 1;
+  transform: translateY(-1px);
+  transition: transform 220ms var(--canon-easing);
+}
+
+.btn-link:hover::after {
+  transform: translate(2px, -1px);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--canon-ink);
   outline-offset: 4px;
+  border-radius: 4px;
 }
 
+// ─── Mobile ──────────────────────────────────────────────────────────
 @media (max-width: 900px) {
-  .canon-product__stage {
-    grid-template-columns: 1fr;
-  }
-
-  .canon-product__stage::before {
-    inset: 4.75rem 1rem;
-  }
-
-  .canon-product__media {
-    position: absolute;
-    inset: 0;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 5rem;
-  }
-
-  .canon-product__copy {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .canon-product__video {
-    width: min(60vw, 400px);
-    height: min(60vw, 400px);
-  }
-
-  .canon-product__step,
-  .canon-product__step:not(:first-child) {
-    inset: auto auto 5.25rem 0;
-    max-width: min(34rem, 90vw);
-    text-align: left;
-  }
-
-  .canon-product__step h1,
-  .canon-product__step h2 {
-    max-width: 11ch;
-    font-size: clamp(3rem, 14vw, 5.8rem);
-  }
-
-  .canon-product__section-intro,
-  .canon-product__feature-grid,
-  .canon-product__specs,
-  .canon-product__cta {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
   .canon-product__story {
     min-height: 540vh;
   }
 
-  .canon-product__nav-actions {
-    gap: 0.35rem;
+  .canon-product__stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 50dvh 50dvh;
+    align-items: stretch;
+    gap: 0;
+    padding: 3.5rem 1.25rem 0;
   }
 
-  .canon-product__nav-link {
-    padding: 0.68rem 0.72rem;
+  .canon-product__media {
+    grid-row: 1;
+    grid-column: 1;
+    height: 100%;
+    padding-right: 0;
   }
 
   .canon-product__video {
-    width: 68vw;
-    height: 68vw;
+    width: 100%;
+    max-width: min(74vw, 480px);
+    max-height: 100%;
+    aspect-ratio: 1 / 1;
   }
 
-  .canon-product__step {
-    bottom: 5.25rem;
+  .canon-product__copy {
+    grid-row: 2;
+    grid-column: 1;
+    min-height: 0;
+    padding: 1rem 0 0;
   }
 
-  .canon-product__specs div {
+  .canon-product__final-map {
+    display: flex;
+    align-items: end;
+    padding: 3.75rem 1.25rem 2.25rem;
+  }
+
+  .canon-product__callouts {
+    display: none;
+  }
+
+  .canon-product__step,
+  .canon-product__step--top,
+  .canon-product__step--bottom {
+    position: absolute;
+    top: 0;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: none;
+    text-align: center;
+
+    h1,
+    h2 {
+      margin: 0 auto;
+      font-size: clamp(2.2rem, 7.6vw, 3.4rem);
+    }
+
+    > p:last-of-type {
+      margin: 0.85rem auto 0;
+      max-width: 32rem;
+      font-size: 1rem;
+    }
+  }
+
+  .canon-product__quick-specs {
+    max-width: 24rem;
+    margin: 1.1rem auto 0;
+    padding-top: 0.85rem;
+    text-align: center;
+
+    div {
+      padding: 0 0.35rem;
+    }
+
+    dt {
+      font-size: 0.66rem;
+    }
+
+    dd {
+      font-size: 0.78rem;
+    }
+  }
+
+  .canon-product__feature-mosaic {
     grid-template-columns: 1fr;
+
+    article,
+    article:first-child {
+      min-height: 24rem;
+    }
   }
 
-  .canon-product__cta {
-    min-height: 76dvh;
+  .canon-product__specs dl {
+    grid-template-columns: 1fr;
+    max-width: 32rem;
+  }
+
+  .canon-product__specs dl > div {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid rgba(245, 245, 247, 0.1);
+  }
+
+  .canon-product__specs dl > div:last-child {
+    border-bottom: 0;
   }
 }
 
+@media (max-width: 600px) {
+  .canon-product__nav-actions {
+    gap: 1rem;
+  }
+
+  .canon-product__feature-mosaic article {
+    min-height: 22rem;
+  }
+
+  .canon-product__quick-specs {
+    display: none;
+  }
+
+  .canon-product__final-map {
+    padding-inline: 1rem;
+  }
+}
+
+// ─── Reduced motion: skip pinning, stack everything ──────────────────
 @media (prefers-reduced-motion: reduce) {
-  .canon-product__story,
-  .canon-product__stage {
+  .canon-product__story {
     min-height: auto;
   }
 
   .canon-product__stage {
-    padding-top: 6rem;
+    display: block;
+    min-height: auto;
+    padding: 6rem 1.5rem 4rem;
   }
 
   .canon-product__media,
   .canon-product__copy,
-  .canon-product__step {
-    position: relative;
+  .canon-product__final-map,
+  .canon-product__callouts {
+    position: static;
+    inset: auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .canon-product__media {
+    margin: 0 auto 2.5rem;
+  }
+
+  .canon-product__video {
+    margin: 0 auto;
+    max-width: min(80vw, 560px);
   }
 
   .canon-product__copy {
     display: grid;
     gap: 3rem;
-    padding-top: min(80vw, 32rem);
+  }
+
+  .canon-product__final-map {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 4rem;
+    padding: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto;
+  }
+
+  .canon-product__callouts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem;
+    width: min(100%, 58rem);
+    margin-inline: auto;
+  }
+
+  .canon-product__callout {
+    position: relative;
+    inset: auto;
+    width: auto;
+    padding-left: 1rem;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .canon-product__callout-dot {
+    top: 0.35rem;
+    left: 0;
+  }
+
+  .canon-product__callout-line {
+    display: none;
   }
 
   .canon-product__step,
-  .canon-product__step:not(:first-child) {
-    inset: auto;
+  .canon-product__step--top,
+  .canon-product__step--bottom {
+    position: static;
+    transform: none;
     opacity: 1;
-    text-align: left;
+    text-align: center;
+    inset: auto;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: auto;
+    max-width: none;
+
+    h1,
+    h2 {
+      margin: 0 auto;
+    }
+
+    > p:last-of-type {
+      margin: 1rem auto 0;
+    }
+  }
+
+  .canon-product__scroll-hint {
+    display: none;
+  }
+
+  .word {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

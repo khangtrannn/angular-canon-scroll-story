@@ -1,20 +1,20 @@
 <main class="canon-product">
+  <header #navBar class="canon-product__nav" aria-label="Canon product story">
+    <a class="canon-product__brand" href="/" aria-label="Canon product story home">
+      Canon
+    </a>
+    <nav class="canon-product__nav-actions" aria-label="Page sections">
+      <a class="canon-product__nav-link" href="#canon-features-title">Features</a>
+      <a class="canon-product__nav-link" href="#canon-specs">Specs</a>
+    </nav>
+  </header>
+
   <section
     #storyContainer
     class="canon-product__story"
     aria-labelledby="canon-product-title"
   >
     <div class="canon-product__stage">
-      <header class="canon-product__nav" aria-label="Canon product story">
-        <a class="canon-product__brand" href="/" aria-label="Canon product story home">
-          Canon
-        </a>
-        <nav class="canon-product__nav-actions" aria-label="Page sections">
-          <a class="canon-product__nav-link" href="#canon-features-title">Features</a>
-          <a class="canon-product__nav-link" href="#canon-specs">Specs</a>
-        </nav>
-      </header>
-
       <div class="canon-product__media">
         <canvas
           #productCanvas
@@ -27,40 +27,54 @@
       </div>
 
       <div class="canon-product__copy">
-        <article #storyStep class="canon-product__step">
+        <article #storyStep class="canon-product__step canon-product__step--top">
           <p class="canon-product__eyebrow">Canon mirrorless system</p>
           <h1 id="canon-product-title">Every detail, revealed by motion.</h1>
           <p>
             Scroll to explore the design, optics, and engineering behind the
             camera.
           </p>
+          <dl class="canon-product__quick-specs" aria-label="Camera highlights">
+            <div>
+              <dt>Sensor</dt>
+              <dd>Full-frame CMOS</dd>
+            </div>
+            <div>
+              <dt>Video</dt>
+              <dd>6K ready</dd>
+            </div>
+            <div>
+              <dt>Weight</dt>
+              <dd>Travel build</dd>
+            </div>
+          </dl>
         </article>
 
-        <article #storyStep class="canon-product__step">
+        <article #storyStep class="canon-product__step canon-product__step--bottom">
           <p class="canon-product__eyebrow">Body</p>
           <h2>Compact body. Serious imaging power.</h2>
           <p>A lightweight form built for creators who move fast.</p>
         </article>
 
-        <article #storyStep class="canon-product__step">
+        <article #storyStep class="canon-product__step canon-product__step--top">
           <p class="canon-product__eyebrow">Lens</p>
-          <h2>Glass that shapes the shot.</h2>
+          <h2>Glass that shapes light.</h2>
           <p>
             Precision optics designed for sharpness, depth, and cinematic
             character.
           </p>
         </article>
 
-        <article #storyStep class="canon-product__step">
+        <article #storyStep class="canon-product__step canon-product__step--bottom">
           <p class="canon-product__eyebrow">Sensor</p>
-          <h2>The image starts at the core.</h2>
+          <h2>The image starts here.</h2>
           <p>
             A high-resolution sensor captures color, light, and motion with
             clarity.
           </p>
         </article>
 
-        <article #storyStep class="canon-product__step">
+        <article #storyStep class="canon-product__step canon-product__step--top">
           <p class="canon-product__eyebrow">Engineering</p>
           <h2>Every layer has a purpose.</h2>
           <p>
@@ -69,7 +83,81 @@
         </article>
       </div>
 
-      <p class="canon-product__scroll-hint">Scroll to reveal</p>
+      <section
+        class="canon-product__final-map"
+        aria-label="Exploded Canon camera part map"
+      >
+        <ol class="canon-product__callouts" aria-label="Exploded camera parts">
+          <li class="canon-product__callout canon-product__callout--top-dials">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Top Dials</strong>
+            <span>Precision controls for shutter speed and exposure compensation.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--hot-shoe">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Multi-function Hot Shoe</strong>
+            <span>Supports external flashes, microphones, and other accessories.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--grip">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Ergonomic Grip</strong>
+            <span>Comfortable grip design for secure handling during extended shoots.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--sensor">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Image Sensor</strong>
+            <span>High-resolution sensor captures incredible detail and dynamic range.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--stabilization">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Image Stabilization</strong>
+            <span>Built-in stabilization minimizes blur and enhances sharpness.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--lcd">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Vari-angle LCD</strong>
+            <span>Touchscreen LCD for easy shooting from any angle.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--mount">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>RF Lens Mount</strong>
+            <span>Large mount diameter for improved light gathering and lens compatibility.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--slots">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Dual Card Slots</strong>
+            <span>Support for high-speed SD cards for extra storage and backup.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--lens">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Interchangeable Lens</strong>
+            <span>RF lenses deliver outstanding optical performance and creative flexibility.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--elements">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Lens Elements</strong>
+            <span>Precision-engineered glass elements for sharp, clear images.</span>
+          </li>
+          <li class="canon-product__callout canon-product__callout--battery">
+            <span class="canon-product__callout-dot" aria-hidden="true"></span>
+            <span class="canon-product__callout-line" aria-hidden="true"></span>
+            <strong>Battery Compartment</strong>
+            <span>Easy access battery door for quick changes on the go.</span>
+          </li>
+        </ol>
+      </section>
+
+      <p class="canon-product__scroll-hint" aria-hidden="true">Scroll to reveal</p>
     </div>
   </section>
 
@@ -83,25 +171,57 @@
       </p>
     </div>
 
-    <div class="canon-product__feature-grid">
+    <div class="canon-product__feature-mosaic">
       <article>
-        <span>01</span>
-        <h3>Fast autofocus</h3>
-        <p>Responsive subject tracking keeps decisive moments crisp.</p>
+        <img
+          ngSrc="/canon/frames/frame0030.jpg"
+          class="canon-product__feature-image"
+          width="1440"
+          height="1440"
+          alt=""
+          aria-hidden="true"
+        />
+        <p class="canon-product__feature-eyebrow">Autofocus</p>
+        <h3>Fast subject tracking.</h3>
+        <p>Responsive autofocus keeps decisive moments crisp from first frame to last.</p>
       </article>
       <article>
-        <span>02</span>
-        <h3>High-resolution sensor</h3>
+        <img
+          ngSrc="/canon/frames/frame0060.jpg"
+          class="canon-product__feature-image"
+          width="1440"
+          height="1440"
+          alt=""
+          aria-hidden="true"
+        />
+        <p class="canon-product__feature-eyebrow">Sensor</p>
+        <h3>High-resolution detail.</h3>
         <p>Rich color, smooth tonal range, and files ready for serious edits.</p>
       </article>
       <article>
-        <span>03</span>
-        <h3>Cinematic video</h3>
+        <img
+          ngSrc="/canon/frames/frame0090.jpg"
+          class="canon-product__feature-image"
+          width="1440"
+          height="1440"
+          alt=""
+          aria-hidden="true"
+        />
+        <p class="canon-product__feature-eyebrow">Video</p>
+        <h3>Cinematic motion.</h3>
         <p>Flexible recording modes support hybrid stills and motion work.</p>
       </article>
       <article>
-        <span>04</span>
-        <h3>Lightweight body</h3>
+        <img
+          ngSrc="/canon/frames/frame0110.jpg"
+          class="canon-product__feature-image"
+          width="1440"
+          height="1440"
+          alt=""
+          aria-hidden="true"
+        />
+        <p class="canon-product__feature-eyebrow">Build</p>
+        <h3>Lightweight by design.</h3>
         <p>Balanced handling for handheld shoots and long production days.</p>
       </article>
     </div>
@@ -112,52 +232,51 @@
     class="canon-product__specs"
     aria-labelledby="canon-specs-title"
   >
-    <div>
-      <p class="canon-product__eyebrow">Technical specs</p>
-      <h2 id="canon-specs-title">Creator-ready performance.</h2>
-      <p>
-        Core capabilities for stills, video, and connected production days.
-      </p>
-    </div>
+    <div class="canon-product__specs-inner">
+      <div class="canon-product__specs-intro">
+        <p class="canon-product__eyebrow">Technical specs</p>
+        <h2 id="canon-specs-title">Creator-ready performance.</h2>
+        <p>
+          Core capabilities for stills, video, and connected production days.
+        </p>
+      </div>
 
-    <dl>
-      <div>
-        <dt>Sensor</dt>
-        <dd>Full-frame CMOS</dd>
-      </div>
-      <div>
-        <dt>Mount</dt>
-        <dd>RF mount</dd>
-      </div>
-      <div>
-        <dt>Video</dt>
-        <dd>4K / 6K capable</dd>
-      </div>
-      <div>
-        <dt>Stabilization</dt>
-        <dd>In-body image stabilization</dd>
-      </div>
-      <div>
-        <dt>Connectivity</dt>
-        <dd>USB-C, Wi-Fi, Bluetooth</dd>
-      </div>
-    </dl>
+      <dl>
+        <div>
+          <dt>Sensor</dt>
+          <dd>Full-frame CMOS</dd>
+        </div>
+        <div>
+          <dt>Mount</dt>
+          <dd>RF mount</dd>
+        </div>
+        <div>
+          <dt>Video</dt>
+          <dd>4K / 6K capable</dd>
+        </div>
+        <div>
+          <dt>Stabilization</dt>
+          <dd>In-body image stabilization</dd>
+        </div>
+        <div>
+          <dt>Connectivity</dt>
+          <dd>USB-C, Wi-Fi, Bluetooth</dd>
+        </div>
+      </dl>
+    </div>
   </section>
 
   <section class="canon-product__cta" aria-labelledby="canon-cta-title">
-    <div>
+    <div class="canon-product__cta-inner">
       <p class="canon-product__eyebrow">Canon mirrorless system</p>
       <h2 id="canon-cta-title">Built for the shot you cannot miss.</h2>
       <p>
         From first frame to final delivery, the system is designed to stay out
         of the way and keep the image in front.
       </p>
-    </div>
-    <div>
-      <p class="canon-product__cta-meta">Scroll story prototype</p>
       <div class="canon-product__actions" aria-label="Product actions">
-        <a href="#canon-features-title">Explore features</a>
-        <a href="#canon-specs">View specs</a>
+        <a class="btn-primary" href="#canon-features-title">Explore features</a>
+        <a class="btn-link" href="#canon-specs">View specs</a>
       </div>
     </div>
   </section>
